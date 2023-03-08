@@ -84,6 +84,45 @@
       scroll-behavior: auto !important;
     }
   }
+
+  /* -------------------------------------------------------------------- 
+    DESIGN SYSTEM: My themes (if any) and the css properties that should
+    be applied according to the projects design in order to have a
+    consistant design
+  -------------------------------------------------------------------- */
+  :root {
+    /* COLOURS */
+
+    /* primary */
+    --clr-seaBlue-300: 178deg 75% 65%;
+    --clr-seaBlue-400: 178deg 60% 48%;
+
+    /* secondary */
+    --clr-sunOrange-300: 39deg 100% 69%;
+    --clr-sunOrange-400: 39deg 88% 58%;
+
+    /* neutral */
+    --clr-turtle-grey-200: 199deg 33% 89%;
+    --clr-turtle-grey-300: 199deg 23% 72%;
+    --clr-turtle-grey-400: 199deg 35% 19%;
+    --clr-turtle-grey-500: 199deg 32% 15%;
+
+    /* DEFAULT THEME */
+
+    /* NewGame Menu */
+    --clr-body-bg: var(--clr-turtle-grey-500);
+    --clr-mark-bg: var(--clr-turtle-grey-400);
+    --clr-player-bg: var(--clr-seaBlue-400);
+    --clr-cpu-or-p2-bg: var(--clr-sunOrange-400);
+
+    /* FONT FAMILIES */
+    --ff-outfit: 'Outfit', sans-serif;
+  }
+
+  body {
+    background-color: hsl(var(--clr-body-bg));
+    font-family: var(--ff-outfit);
+  }
 }
 
 @layer utilities {
