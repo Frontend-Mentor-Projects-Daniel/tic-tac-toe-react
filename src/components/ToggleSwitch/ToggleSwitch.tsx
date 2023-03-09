@@ -6,8 +6,9 @@ function ToggleSwitch() {
   const [xBg, setXBg] = React.useState(true);
 
   return (
-    <form className='flex'>
+    <>
       {/* X mark */}
+
       <div className='flex flex-1 text-center'>
         <label
           className={`${
@@ -79,7 +80,7 @@ function ToggleSwitch() {
           <VisuallyHidden>O</VisuallyHidden>
         </label>
       </div>
-    </form>
+    </>
   );
 }
 
