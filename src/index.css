@@ -43,7 +43,7 @@
   h5,
   h6,
   p {
-    font-weight: 400;
+    font-weight: 700;
   }
   /* Avoid text overflows */
   p,
@@ -112,32 +112,47 @@
     /* NewGame Menu */
     --clr-body-bg: var(--clr-turtle-grey-500);
     --clr-mark-bg: var(--clr-turtle-grey-400);
+    --clr-toggle-bg: var(--clr-turtle-grey-500);
+    --clr-toggle-mark-regular-fill: var(--clr-turtle-grey-300);
+    --clr-toggle-mark-regular-bg: var(--clr-turtle-grey-500);
+    --clr-toggle-mark-checked-fill: var(--clr-turtle-grey-500);
+    --clr-toggle-mark-checked-bg: var(--clr-turtle-grey-300);
+    --clr-header-text: var(--clr-turtle-grey-300);
+    --clr-side-note-text: var(--clr-turtle-grey-300);
     --clr-player-bg: var(--clr-seaBlue-400);
     --clr-cpu-or-p2-bg: var(--clr-sunOrange-400);
-
-    /* FONT FAMILIES */
-    --ff-outfit: 'Outfit', sans-serif;
   }
 
   body {
     background-color: hsl(var(--clr-body-bg));
-    font-family: var(--ff-outfit);
+    font-family: 'Outfit', sans-serif;
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-height: 100vh;
   }
 }
 
 @layer utilities {
   /* -------------------------------------------------------------------- 
-    Shows content to screen readers while hiding from sighted users
+    Centers content and allows for elements to ignore the max-width
   -------------------------------------------------------------------- */
-  .sr-only {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    white-space: nowrap !important;
-    border: 0 !important;
+  .center {
+    display: grid;
+    grid-template-columns:
+      1fr
+      min(44ch, 100%)
+      1fr;
+  }
+  .center > * {
+    grid-column: 2;
+  }
+  .full-bleed {
+    width: 100%;
+    grid-column: 1 / 4;
   }
 }

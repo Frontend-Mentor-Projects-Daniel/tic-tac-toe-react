@@ -12,7 +12,13 @@ function App() {
         </h1>
       </header>
 
-      <NewGameMenu />
+      <main className='center px-6'>
+        <NewGameMenu />
+      </main>
+
+      <footer className='center text-center text-header-text'>
+        <p>Made by Daniel Arzanipour</p>
+      </footer>
     </>
   );
 }
