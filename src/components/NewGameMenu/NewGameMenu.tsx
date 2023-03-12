@@ -1,27 +1,34 @@
 import React from 'react';
-import Logo from '../Logo/Logo';
+import Logo from '../Logo';
 
-import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
+import ToggleSwitch from '../ToggleSwitch';
 
-type newGameMenuProps = {
-  newGame: string;
-  setNewGame: React.Dispatch<React.SetStateAction<string>>;
+type NewGameMenuProps = {
+  toggleBtnOne: boolean;
+  setToggleBtnOne: React.Dispatch<React.SetStateAction<boolean>>;
+  setVsPlayer: React.Dispatch<React.SetStateAction<string>>;
+  setHasSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 /**
  * Renders the initial game board
  */
-function NewGameMenu({ newGame, setNewGame }: newGameMenuProps) {
-  const [xMark, setXMark] = React.useState(true);
-
-  /**
-   * Renders whether the player will play against computer or another person
-   */
+function NewGameMenu({
+  toggleBtnOne,
+  setToggleBtnOne,
+  setVsPlayer,
+  setHasSubmitted,
+}: NewGameMenuProps) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    if (xMark === true) {
-      // play against player
-    } else {
-      // play against cpu
+    setHasSubmitted(true);
+  };
+
+  const handleButtonClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    const target = e.target;
+    if (target instanceof HTMLButtonElement) {
+      setVsPlayer(target.id);
     }
   };
 
@@ -46,13 +53,15 @@ function NewGameMenu({ newGame, setNewGame }: newGameMenuProps) {
         {/* toggle switch */}
         <form
           id='mark-form'
-          className='flex'
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit(e);
           }}
         >
-          <ToggleSwitch xMark={xMark} setXMark={setXMark} />
+          <ToggleSwitch
+            toggleBtnOne={toggleBtnOne}
+            setToggleBtnOne={setToggleBtnOne}
+          />
         </form>
 
         <p className='mt-7 text-center text-sm font-medium uppercase tracking-wide text-side-note-text opacity-50 md:mt-4'>
@@ -63,14 +72,22 @@ function NewGameMenu({ newGame, setNewGame }: newGameMenuProps) {
       {/* Play Buttons */}
       <div className='mt-8 flex flex-col gap-4 md:mt-10 md:gap-5'>
         <button
+          onClick={(e) => {
+            handleButtonClick(e);
+          }}
           form='mark-form'
           className='h-[56px] cursor-pointer rounded-2xl border-none bg-cpu-or-p2-bg font-bold uppercase tracking-widest shadow-[inset_0px_-8px_0px_#CC8B13;]'
+          id='vsCpu'
         >
           New Game (vs cpu)
         </button>
         <button
+          onClick={(e) => {
+            handleButtonClick(e);
+          }}
           form='mark-form'
           className='h-[56px] cursor-pointer rounded-2xl border-none bg-player-bg font-bold uppercase tracking-widest shadow-[inset_0px_-8px_0px_#118C87;]'
+          id='vsPlayer'
         >
           New Game (vs player)
         </button>

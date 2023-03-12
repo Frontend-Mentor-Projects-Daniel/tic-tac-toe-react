@@ -2,20 +2,28 @@ import React from 'react';
 
 import VisuallyHidden from '../VisuallyHidden/VisuallyHidden';
 
+/**
+ * Toggle switches will have 2 states, it could be on/off, light/dark mode, X or O. stateOne is the boolean value of whether one of these is true or false (making the second state the opposite value)
+ *
+ * In order to use this value elsewhere, it will lift state up
+ */
 type toggleSwitchProps = {
-  xMark: boolean;
-  setXMark: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleBtnOne: boolean;
+  setToggleBtnOne: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function ToggleSwitch({ xMark, setXMark }: toggleSwitchProps) {
+export function ToggleSwitch({
+  toggleBtnOne,
+  setToggleBtnOne,
+}: toggleSwitchProps) {
   return (
-    <>
+    <div className='flex'>
       {/* X mark */}
 
       <div className='flex flex-1 text-center'>
         <label
           className={`${
-            xMark && 'bg-toggle-mark-checked-bg'
+            toggleBtnOne && 'bg-toggle-mark-checked-bg'
           } relative flex flex-1 flex-col-reverse items-center rounded-lg text-6xl text-white`}
           htmlFor='x-mark'
         >
@@ -27,7 +35,7 @@ function ToggleSwitch({ xMark, setXMark }: toggleSwitchProps) {
             className='peer absolute w-[1em] opacity-0'
             defaultChecked
             onChange={() => {
-              setXMark(true);
+              setToggleBtnOne(true);
             }}
           />
 
@@ -52,7 +60,7 @@ function ToggleSwitch({ xMark, setXMark }: toggleSwitchProps) {
       <div className='flex flex-1 text-center'>
         <label
           className={`${
-            !xMark && 'bg-toggle-mark-checked-bg'
+            !toggleBtnOne && 'bg-toggle-mark-checked-bg'
           } relative flex flex-1 flex-col-reverse items-center rounded-lg text-6xl text-white`}
           htmlFor='o-mark'
         >
@@ -63,7 +71,7 @@ function ToggleSwitch({ xMark, setXMark }: toggleSwitchProps) {
             value='o'
             className='peer absolute w-[1em] opacity-0'
             onChange={() => {
-              setXMark(false);
+              setToggleBtnOne(false);
             }}
           />
 
@@ -83,7 +91,7 @@ function ToggleSwitch({ xMark, setXMark }: toggleSwitchProps) {
           <VisuallyHidden>O</VisuallyHidden>
         </label>
       </div>
-    </>
+    </div>
   );
 }
 
