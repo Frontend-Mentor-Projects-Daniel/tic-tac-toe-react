@@ -1,14 +1,30 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
 
-import xImageOutline from '../../assets/icon-x-outline.svg';
-import oImageOutline from '../../assets/icon-o-outline.svg';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
+
+type newGameMenuProps = {
+  newGame: string;
+  setNewGame: React.Dispatch<React.SetStateAction<string>>;
+};
 
 /**
  * Renders the initial game board
  */
-function NewGameMenu() {
+function NewGameMenu({ newGame, setNewGame }: newGameMenuProps) {
+  const [xMark, setXMark] = React.useState(true);
+
+  /**
+   * Renders whether the player will play against computer or another person
+   */
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (xMark === true) {
+      // play against player
+    } else {
+      // play against cpu
+    }
+  };
+
   return (
     <div>
       {/* Logo */}
@@ -28,8 +44,15 @@ function NewGameMenu() {
         </h2>
 
         {/* toggle switch */}
-        <form id='mark-form' className='flex'>
-          <ToggleSwitch />
+        <form
+          id='mark-form'
+          className='flex'
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(e);
+          }}
+        >
+          <ToggleSwitch xMark={xMark} setXMark={setXMark} />
         </form>
 
         <p className='mt-7 text-center text-sm font-medium uppercase tracking-wide text-side-note-text opacity-50 md:mt-4'>
@@ -55,8 +78,5 @@ function NewGameMenu() {
     </div>
   );
 }
-
-// box-shadow: inset 0px -8px 0px #CC8B13;
-// box-shadow: inset 0px -8px 0px #118C87;
 
 export default NewGameMenu;

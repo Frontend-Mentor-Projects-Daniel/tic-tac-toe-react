@@ -4,6 +4,8 @@ import NewGameMenu from '../NewGameMenu/NewGameMenu';
 import VisuallyHidden from '../VisuallyHidden/VisuallyHidden';
 
 function App() {
+  const [newGame, setNewGame] = React.useState('');
+
   return (
     <>
       <header>
@@ -13,7 +15,7 @@ function App() {
       </header>
 
       <main className='center px-6'>
-        <NewGameMenu />
+        <NewGameMenu newGame={newGame} setNewGame={setNewGame} />
       </main>
 
       <footer className='center text-center text-header-text'>

@@ -2,9 +2,12 @@ import React from 'react';
 
 import VisuallyHidden from '../VisuallyHidden/VisuallyHidden';
 
-function ToggleSwitch() {
-  const [xBg, setXBg] = React.useState(true);
+type toggleSwitchProps = {
+  xMark: boolean;
+  setXMark: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
+function ToggleSwitch({ xMark, setXMark }: toggleSwitchProps) {
   return (
     <>
       {/* X mark */}
@@ -12,8 +15,8 @@ function ToggleSwitch() {
       <div className='flex flex-1 text-center'>
         <label
           className={`${
-            xBg && 'bg-toggle-mark-checked-bg'
-          } relative flex flex-1 flex-col-reverse items-center text-6xl text-white`}
+            xMark && 'bg-toggle-mark-checked-bg'
+          } relative flex flex-1 flex-col-reverse items-center rounded-lg text-6xl text-white`}
           htmlFor='x-mark'
         >
           <input
@@ -24,7 +27,7 @@ function ToggleSwitch() {
             className='peer absolute w-[1em] opacity-0'
             defaultChecked
             onChange={() => {
-              setXBg(true);
+              setXMark(true);
             }}
           />
 
@@ -49,8 +52,8 @@ function ToggleSwitch() {
       <div className='flex flex-1 text-center'>
         <label
           className={`${
-            !xBg && 'bg-toggle-mark-checked-bg'
-          } relative flex flex-1 flex-col-reverse items-center text-6xl text-white`}
+            !xMark && 'bg-toggle-mark-checked-bg'
+          } relative flex flex-1 flex-col-reverse items-center rounded-lg text-6xl text-white`}
           htmlFor='o-mark'
         >
           <input
@@ -60,7 +63,7 @@ function ToggleSwitch() {
             value='o'
             className='peer absolute w-[1em] opacity-0'
             onChange={() => {
-              setXBg(false);
+              setXMark(false);
             }}
           />
 
