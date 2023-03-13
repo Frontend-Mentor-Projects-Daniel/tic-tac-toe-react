@@ -121,6 +121,11 @@
     --clr-side-note-text: var(--clr-turtle-grey-300);
     --clr-player-bg: var(--clr-seaBlue-400);
     --clr-cpu-or-p2-bg: var(--clr-sunOrange-400);
+
+    /* GameBoard */
+    --clr-header-turn-text: var(--clr-turtle-grey-300);
+    --clr-header-turn-bg: var(--clr-turtle-grey-400);
+    --clr-header-restartBtn-bg: var(--clr-turtle-grey-300);
   }
 
   body {

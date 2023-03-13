@@ -1,6 +1,7 @@
 import React from 'react';
 
 import NewGameMenu from '../NewGameMenu';
+import GameBoard from '../GameBoard';
 import VisuallyHidden from '../VisuallyHidden';
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
 
         {hasSubmitted && (
           <div className='text-center text-4xl text-white'>
-            Render Game board
+            <GameBoard />
           </div>
         )}
       </main>

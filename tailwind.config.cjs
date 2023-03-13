@@ -22,6 +22,11 @@ module.exports = {
         'side-note-text': 'hsl(var(--clr-side-note-text) / <alpha-value>)',
         'player-bg': 'hsl(var(--clr-player-bg) / <alpha-value>)',
         'cpu-or-p2-bg': 'hsl(var(--clr-cpu-or-p2-bg) / <alpha-value>)',
+
+        'header-turn-text': 'hsl(var(--clr-header-turn-text) / <alpha-value>)',
+        'header-turn-bg': 'hsl(var(--clr-header-turn-bg) / <alpha-value>)',
+        'header-restartBtn-bg':
+          'hsl(var(--clr-header-restartBtn-bg) / <alpha-value>)',
       },
 
       fontFamily: {
