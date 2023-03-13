@@ -128,6 +128,11 @@
     --clr-header-restartBtn-bg: var(--clr-turtle-grey-300);
 
     --clr-grid-bg: var(--clr-turtle-grey-400);
+
+    --clr-scoreboard-text: var(--clr-turtle-grey-500);
+    --clr-scoreboard-x-bg: var(--clr-seaBlue-400);
+    --clr-scoreboard-o-bg: var(--clr-sunOrange-400);
+    --clr-scoreboard-ties-bg: var(--clr-turtle-grey-300);
   }
 
   body {

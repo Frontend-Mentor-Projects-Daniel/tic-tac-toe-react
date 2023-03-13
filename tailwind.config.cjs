@@ -29,6 +29,12 @@ module.exports = {
           'hsl(var(--clr-header-restartBtn-bg) / <alpha-value>)',
 
         'grid-bg': 'hsl(var(--clr-grid-bg) / <alpha-value>)',
+
+        'scoreboard-text': 'hsl(var(--clr-scoreboard-text) / <alpha-value>)',
+        'scoreboard-x-bg': 'hsl(var(--clr-scoreboard-x-bg) / <alpha-value>)',
+        'scoreboard-o-bg': 'hsl(var(--clr-scoreboard-o-bg) / <alpha-value>)',
+        'scoreboard-ties-bg':
+          'hsl(var(--clr-scoreboard-ties-bg) / <alpha-value>)',
       },
 
       fontFamily: {
