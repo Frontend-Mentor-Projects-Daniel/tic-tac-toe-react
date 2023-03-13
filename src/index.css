@@ -126,6 +126,8 @@
     --clr-header-turn-text: var(--clr-turtle-grey-300);
     --clr-header-turn-bg: var(--clr-turtle-grey-400);
     --clr-header-restartBtn-bg: var(--clr-turtle-grey-300);
+
+    --clr-grid-bg: var(--clr-turtle-grey-400);
   }
 
   body {
@@ -150,7 +152,7 @@
     display: grid;
     grid-template-columns:
       1fr
-      min(44ch, 100%)
+      min(36ch, 100%)
       1fr;
   }
   .center > * {

@@ -27,6 +27,8 @@ module.exports = {
         'header-turn-bg': 'hsl(var(--clr-header-turn-bg) / <alpha-value>)',
         'header-restartBtn-bg':
           'hsl(var(--clr-header-restartBtn-bg) / <alpha-value>)',
+
+        'grid-bg': 'hsl(var(--clr-grid-bg) / <alpha-value>)',
       },
 
       fontFamily: {
