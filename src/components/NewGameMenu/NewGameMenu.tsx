@@ -3,22 +3,22 @@ import Logo from '../Logo';
 
 import ToggleSwitch from '../ToggleSwitch';
 
+import { ToggleBtnOneContext } from '../../contexts/ToggleProvider';
+import { VsPlayerContext } from '../../contexts/VsPlayerContext';
+
 type NewGameMenuProps = {
-  toggleBtnOne: boolean;
-  setToggleBtnOne: React.Dispatch<React.SetStateAction<boolean>>;
-  setVsPlayer: React.Dispatch<React.SetStateAction<string>>;
   setHasSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 /**
  * Renders the initial game board
  */
-function NewGameMenu({
-  toggleBtnOne,
-  setToggleBtnOne,
-  setVsPlayer,
-  setHasSubmitted,
-}: NewGameMenuProps) {
+function NewGameMenu({ setHasSubmitted }: NewGameMenuProps) {
+  const { toggleBtnOne, setToggleBtnOne } =
+    React.useContext(ToggleBtnOneContext);
+
+  const { vsPlayer, setVsPlayer } = React.useContext(VsPlayerContext);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setHasSubmitted(true);
   };
@@ -87,7 +87,7 @@ function NewGameMenu({
           }}
           form='mark-form'
           className='h-[56px] cursor-pointer rounded-2xl border-none bg-player-bg font-bold uppercase tracking-widest shadow-[inset_0px_-8px_0px_#118C87;]'
-          id='vsPlayer'
+          id='{vsPlayer}'
         >
           New Game (vs player)
         </button>
