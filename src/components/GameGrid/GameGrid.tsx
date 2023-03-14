@@ -2,27 +2,13 @@ import React from 'react';
 
 import xIcon from '../../assets/icon-x.svg';
 import oIcon from '../../assets/icon-o.svg';
-import { convertStringToNum } from '../../utils/helpers';
-
-//TODO
-// 1) When a user clicks on a square either x or o should be placed there depending on who's turn it is
-//    + OnClick an image should be rendered
-//    + OnClick which square has been taken should become known
-// 2) A user shouldn't be able to click on a square that has a shape in it
-// 3) When a user hovers over an empty square it should show an outline of either x or o
-// 4) When a player has gotten 3 in a row or all the tiles have been filled, the game will end
-
-// prettier-ignore
-const GRID = [
-  ["", "" , ""],
-  ["", "" , ""],
-  ["", "" , ""]
-]
+import { convertStringToNum, sleep } from '../../utils/helpers';
+import GameButton from '../GameButton/GameButton';
 
 function GameGrid() {
-  const [image, setImage] = React.useState(GRID);
-  const [alt, setAlt] = React.useState(GRID);
-  const [grid, setGrid] = React.useState(GRID);
+  const [board, setBoard] = React.useState(Array(9).fill(null));
+  const [xIsNext, setXisNext] = React.useState(true);
+  const winner = calculateWinner(board);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const target = e.target;
@@ -32,25 +18,21 @@ function GameGrid() {
       if (buttonPositionString) {
         const buttonPositionNum = convertStringToNum(buttonPositionString);
 
-        // create a new array so react knows to re-render
-        const newGrid = [...grid];
-        // newGrid[buttonPositionNum] = buttonPositionString;
-        // setGrid(newGrid);
+        const boardCopy = [...board];
 
-        // if (newGrid[buttonPositionNum] === buttonPositionString) {
-        //   const newImageGrid = [...grid];
-        //   setImage((nextValue) => {
-        //     return newImageGrid;
-        //   });
+        // If user click an occupied square or if game is won, return
+        if (winner || boardCopy[buttonPositionNum]) return;
+        // Put an X or an O in the clicked square
+        boardCopy[buttonPositionNum] = xIsNext ? xIcon : oIcon;
 
-        //   const newAltGrid = [...grid];
-        //   setAlt(newAltGrid);
-        // }
+        setBoard(boardCopy);
+        setXisNext(!xIsNext);
       }
     }
   };
 
   return (
+    // <GameButton />
     <div className='my-5 grid grid-cols-3 justify-items-center gap-y-5 gap-x-5'>
       <button
         data-position='0'
@@ -59,7 +41,7 @@ function GameGrid() {
         }}
         className='flex h-24 w-24 cursor-pointer items-center justify-center rounded-xl border-none bg-grid-bg shadow-[inset_0px_-8px_0px_#10212A]'
       >
-        {/* <img src={image[0]} alt={alt[0]} /> */}
+        <img src={board[0]} alt='' />
       </button>
       <button
         data-position='1'
@@ -68,7 +50,7 @@ function GameGrid() {
         }}
         className='flex h-24 w-24 cursor-pointer items-center justify-center rounded-xl border-none bg-grid-bg shadow-[inset_0px_-8px_0px_#10212A]'
       >
-        {/* <img src={image[1]} alt={alt[1]} /> */}
+        <img src={board[1]} alt='' />
       </button>
       <button
         data-position='2'
@@ -77,7 +59,7 @@ function GameGrid() {
         }}
         className='flex h-24 w-24 cursor-pointer items-center justify-center rounded-xl border-none bg-grid-bg shadow-[inset_0px_-8px_0px_#10212A]'
       >
-        {/* <img src={image[2]} alt={alt[2]} /> */}
+        <img src={board[2]} alt='' />
       </button>
 
       <button
@@ -87,7 +69,7 @@ function GameGrid() {
         }}
         className='flex h-24 w-24 cursor-pointer items-center justify-center rounded-xl border-none bg-grid-bg shadow-[inset_0px_-8px_0px_#10212A]'
       >
-        {/* <img src={image[3]} alt={alt[3]} /> */}
+        <img src={board[3]} alt='' />
       </button>
       <button
         data-position='4'
@@ -96,7 +78,7 @@ function GameGrid() {
         }}
         className='flex h-24 w-24 cursor-pointer items-center justify-center rounded-xl border-none bg-grid-bg shadow-[inset_0px_-8px_0px_#10212A]'
       >
-        {/* <img src={image[4]} alt={alt[4]} /> */}
+        <img src={board[4]} alt='' />
       </button>
       <button
         data-position='5'
@@ -105,7 +87,7 @@ function GameGrid() {
         }}
         className='flex h-24 w-24 cursor-pointer items-center justify-center rounded-xl border-none bg-grid-bg shadow-[inset_0px_-8px_0px_#10212A]'
       >
-        {/* <img src={image[5]} alt={alt[5]} /> */}
+        <img src={board[5]} alt='' />
       </button>
 
       <button
@@ -115,7 +97,7 @@ function GameGrid() {
         }}
         className='flex h-24 w-24 cursor-pointer items-center justify-center rounded-xl border-none bg-grid-bg shadow-[inset_0px_-8px_0px_#10212A]'
       >
-        {/* <img src={image[6]} alt={alt[6]} /> */}
+        <img src={board[6]} alt='' />
       </button>
       <button
         data-position='7'
@@ -124,7 +106,7 @@ function GameGrid() {
         }}
         className='flex h-24 w-24 cursor-pointer items-center justify-center rounded-xl border-none bg-grid-bg shadow-[inset_0px_-8px_0px_#10212A]'
       >
-        {/* <img src={image[7]} alt={alt[7]} /> */}
+        <img src={board[7]} alt='' />
       </button>
       <button
         data-position='8'
@@ -133,10 +115,31 @@ function GameGrid() {
         }}
         className='flex h-24 w-24 cursor-pointer items-center justify-center rounded-xl border-none bg-grid-bg shadow-[inset_0px_-8px_0px_#10212A]'
       >
-        {/* <img src={image[8]} alt={alt[8]} /> */}
+        <img src={board[8]} alt='' />
       </button>
     </div>
   );
 }
 
 export default GameGrid;
+
+// @ts-ignore
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+}

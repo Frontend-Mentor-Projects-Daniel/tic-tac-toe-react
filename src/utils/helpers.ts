@@ -13,3 +13,15 @@ export function convertStringToNum(n: string): number {
 
   return num;
 }
+
+/**
+ * A function used to simulate the computer thinking of its next move
+ * @param milliseconds - The amount of the time the computer should spend thinking on a move
+ */
+export function sleep(milliseconds: number = 2000) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
