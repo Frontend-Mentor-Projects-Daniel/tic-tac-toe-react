@@ -1,6 +1,5 @@
 import React from 'react';
 import Logo from '../Logo';
-import VisuallyHidden from '../VisuallyHidden';
 
 import TurnDisplay from '../TurnDisplay';
 import RestartButton from '../RestartButton';
@@ -25,6 +24,12 @@ const iconO = (
     />
   </svg>
 );
+
+// TODO:
+// 0) Delete iconO/X when they're not needed
+// 1) Complete grid logic first
+// 2) Complete header logic second
+// 3) Complete scoreBoard logic last
 
 function GameBoard() {
   return (
