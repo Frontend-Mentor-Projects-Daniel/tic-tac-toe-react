@@ -25,3 +25,33 @@ export function sleep(milliseconds: number = 2000) {
     currentDate = Date.now();
   } while (currentDate - date < milliseconds);
 }
+
+/**
+ * Generates an array of numbers between the `start` (inclusive) and `end` (exclusive) values, incrementing by `step` amount at each iteration.
+ *
+ * If only one argument is provided, the function generates an array of numbers from 0 up to the `start` value.
+ *
+ * @param start - The starting value of the range.
+ * @param end - The ending value of the range.
+ * @param step - The increment amount between each value of the range. Defaults to 1.
+ *
+ * @returns An array of numbers between `start` (inclusive) and `end` (exclusive), incremented by `step` amount at each iteration.
+ *
+ * @example
+ * range(5); // Returns [0, 1, 2, 3, 4]
+ * range(1, 6, 2); // Returns [1, 3, 5]
+ */
+export const range = (start: number, end?: number, step: number = 1) => {
+  let output = [];
+
+  if (typeof end === 'undefined') {
+    end = start;
+    start = 0;
+  }
+
+  for (let i = start; i < end; i += step) {
+    output.push(i);
+  }
+
+  return output;
+};
